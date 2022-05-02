@@ -21,6 +21,8 @@ function Enroll({ data }: EnrollProps) {
     })
 
     alert('Compra realizada com sucesso!');
+
+    window.location.href = '/app/courses';
   }
 
   return (
