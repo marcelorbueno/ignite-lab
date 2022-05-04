@@ -18,7 +18,8 @@
     "next": "12.1.4",
     "next-http-proxy-middleware": "^1.2.4",
     "react": "17",
-    "react-dom": "17"
+    "react-dom": "17",
+    "react-toast-notifications": "^2.5.1"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.6.2",

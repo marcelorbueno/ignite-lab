@@ -5,6 +5,8 @@ import { GetStaticProps } from "next";
 import { getServerPageGetProducts, ssrGetProducts } from "../graphql/generated/pagePublic";
 import { GetProductsQuery, useCreatePurchaseMutation } from "../graphql/generated/graphql";
 import { withApollo } from "../lib/withApollo";
+import { useToasts } from 'react-toast-notifications';
+import { useRouter } from "next/router";
 
 interface EnrollProps {
   data: GetProductsQuery;
@@ -12,6 +14,8 @@ interface EnrollProps {
 
 function Enroll({ data }: EnrollProps) {
   const [createPurchase] = useCreatePurchaseMutation()
+  const { addToast } = useToasts();
+  const router = useRouter();
 
   async function handlePurchaseProduct(productId: string) {
     await createPurchase({
@@ -20,9 +24,13 @@ function Enroll({ data }: EnrollProps) {
       }
     })
 
-    alert('Compra realizada com sucesso!');
+    // alert('Compra realizada com sucesso!');
 
-    window.location.href = '/app/courses';
+    addToast('Compra realizada com sucesso.', {
+      appearance: 'success',
+    });
+
+    router.push('/app/courses');
   }
 
   return (
