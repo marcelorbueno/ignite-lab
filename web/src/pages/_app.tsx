@@ -1,17 +1,17 @@
 import { UserProvider } from "@auth0/nextjs-auth0";
-import { ToastProvider } from 'react-toast-notifications';
+import { Toaster } from 'react-hot-toast';
 import '../styles/global.css'
 
 function MyApp({ Component, pageProps }) {
   return (
-      <ToastProvider
-      autoDismiss
-      autoDismissTimeout={5000}
-      >
-        <UserProvider>
-          <Component {...pageProps} />
-        </UserProvider>
-      </ToastProvider>
+    <UserProvider>
+      <Component {...pageProps} />
+      <Toaster
+        toastOptions={{
+          duration: 4000,
+        }}
+      />
+    </UserProvider>
   );
 }
 

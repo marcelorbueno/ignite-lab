@@ -5,7 +5,7 @@ import { GetStaticProps } from "next";
 import { getServerPageGetProducts, ssrGetProducts } from "../graphql/generated/pagePublic";
 import { GetProductsQuery, useCreatePurchaseMutation } from "../graphql/generated/graphql";
 import { withApollo } from "../lib/withApollo";
-import { useToasts } from 'react-toast-notifications';
+import toast from 'react-hot-toast';
 import { useRouter } from "next/router";
 
 interface EnrollProps {
@@ -14,7 +14,6 @@ interface EnrollProps {
 
 function Enroll({ data }: EnrollProps) {
   const [createPurchase] = useCreatePurchaseMutation()
-  const { addToast } = useToasts();
   const router = useRouter();
 
   async function handlePurchaseProduct(productId: string) {
@@ -24,11 +23,7 @@ function Enroll({ data }: EnrollProps) {
       }
     })
 
-    // alert('Compra realizada com sucesso!');
-
-    addToast('Compra realizada com sucesso.', {
-      appearance: 'success',
-    });
+    toast.success('Compra realizada com sucesso.');
 
     router.push('/app/courses');
   }
@@ -43,6 +38,7 @@ function Enroll({ data }: EnrollProps) {
       <div className="bg-white">
         <div className="relative overflow-hidden bg-gray-50">
           <Header />
+
           <main className="py-20 max-w-7xl mx-auto ">
             <div className="text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
               <h2 className="text-base font-semibold tracking-wider text-cyan-600 uppercase">Comece a estudar</h2>
